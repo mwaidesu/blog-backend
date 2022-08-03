@@ -1,9 +1,11 @@
 class BlogsController < ApplicationController
   before_action :set_blog, only: %i[ show update destroy ]
+  before_action :authorized
 
   # GET /blogs
   def index
-    @blogs = Blog.all
+    # @blogs = Blog.all
+    @blogs = Blog.where user: @user.id 
 
     render json: @blogs
   end
@@ -16,6 +18,7 @@ class BlogsController < ApplicationController
   # POST /blogs
   def create
     @blog = Blog.new(blog_params)
+    @blog.user = @user
 
     if @blog.save
       render json: @blog, status: :created, location: @blog
