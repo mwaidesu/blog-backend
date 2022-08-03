@@ -1,5 +1,6 @@
 # config/routes.rb
 Rails.application.routes.draw do
+  resources :blogs
   # route to test your configuration
   # get '/hello', to: 'application#hello_world'
 
